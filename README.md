@@ -1,2 +1,20 @@
-# Yand_sprint10_notification
-Notification service
+# Сервис нотификации
+
+Проект для реализации коммуникации с пользователем нашего кинотеатра через Email, мобильные пуш-уведомления, websocket в браузере.
+
+# Запуск проекта
+
+```
+cd email
+```
+```
+docker-compose build
+```
+```
+docker-compose up -d
+```
+
+# Остановка:
+```
+docker-compose down -v
+```
