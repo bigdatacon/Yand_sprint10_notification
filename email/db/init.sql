@@ -487,4 +487,5 @@ ALTER TABLE ONLY public.scheduled_notification
 
 ALTER TABLE ONLY public.scheduled_notification_user
     ADD CONSTRAINT scheduled_notification_user_scheduled_notification_id_fk FOREIGN KEY (scheduled_notification_id) REFERENCES public.scheduled_notification(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
 COMMIT;
