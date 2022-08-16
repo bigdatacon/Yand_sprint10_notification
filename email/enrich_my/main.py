@@ -1,90 +1,31 @@
-from typing import List
 
-from fastapi import FastAPI, Depends
-from pydantic import BaseModel, Field
-import databases
-import sqlalchemy
-from datetime import datetime
+from typing import Optional
+from fastapi import FastAPI
 
-DATABASE_URL = "sqlite:///./store.db"
+from pydantic import BaseModel
+from services.authmy import AuthServiceMy
+from wait_for_pg import PGConnection
+import requests
 
-metadata = sqlalchemy.MetaData()
-
-database = databases.Database(DATABASE_URL)
-
-register = sqlalchemy.Table(
-    "register",
-    metadata,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("name", sqlalchemy.String(500)),
-    sqlalchemy.Column("date_created", sqlalchemy.DateTime())
-)
-
-engine = sqlalchemy.create_engine(
-    DATABASE_URL, connect_args={"check_same_thread": False}
-)
-
-metadata.create_all(engine)
+class Package(BaseModel):
+    name: str
+    number: str
+    description: Optional[str] = None
 
 app = FastAPI()
 
-@app.on_event("startup")
-async def connect():
-    await database.connect()
+@app.get('/')
+async def hello_world():
+    return {'Hello' : 'World'}
 
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
+@app.get('/user')
+async def return_user_info_by_id(db_name, user_id):
+    connection = PGConnection(db_name).main()
+    user_info = AuthServiceMy(connection).get_by_id(user_id)
+    return {'user_info' : user_info}
 
-class RegisterIn(BaseModel):
-    name: str = Field(...)
-
-class Register(BaseModel):
-    id: int
-    name: str
-    date_created: datetime
-
-@app.post('/register/', response_model=Register)
-async def create(r: RegisterIn = Depends()):
-    query = register.insert().values(
-        name=r.name,
-        date_created=datetime.utcnow()
-    )
-    record_id = await database.execute(query)
-    print(f'register.columns : {register.columns} ')
-    query = register.select().where(register.c.id == record_id)
-    # query = register.select().where(register.id == record_id)
-    # print(f' eto query : {query}')
-    row = await database.fetch_one(query)
-    # print(f' eto row : {row}')
-    return {**row}
-    # return register.columns
-
-@app.get('/register/{id}', response_model=Register)
-async def get_one(id: int):
-    query = register.select().where(register.c.id == id)
-    user = await database.fetch_one(query)
-    return {**user}
-
-@app.get('/register/', response_model=List[Register])
-async def get_all():
-    query = register.select()
-    all_get = await database.fetch_all(query)
-    return all_get
-
-@app.put('/register/{id}', response_model=Register)
-async def update(id: int, r: RegisterIn = Depends()):
-
-    query = register.update().where(register.c.id == id).values(
-        name=r.name,
-        date_created=datetime.utcnow(),
-    )
-    record_id = await database.execute(query)
-    query = register.select().where(register.c.id == record_id)
-    row = await database.fetch_one(query)
-    return {**row}
-
-@app.delete("/register/{id}", response_model=Register)
-async def delete(id: int):
-    query = register.delete().where(register.c.id == id)
-    return await database.execute(query)
+# answer = requests.get("http://127.0.0.1:8000/user/", params={'db_name' : 'auth', 'user_id' : 'a61846cf-8882-4213-a471-f763000d1147'})
+# print(f' eto answer : {answer}')
+# @app.post("/package/{priority}")
+# async def make_package(priority: int, package: Package, value: bool):
+#     return {"priority": priority, **package.dict(), "value": value}

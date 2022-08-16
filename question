@@ -1,0 +1,1 @@
+print(f' eto AuthService : {AuthService(connection).get_by_id(id_seek)}')           ## Не работает вызов функции в email/enrich_my/wait_for_pg.py

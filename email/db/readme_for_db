@@ -1,4 +1,5 @@
 Подключитесь к контейнеру:
 docker exec -it email_postgres_1 bash
+docker exec -it enrich_my_postgres_1 bash
 Теперь вы внутри контейнера. Чтобы попасть в PostgreSQL shell, наберите такую команду:
 psql -U postgres

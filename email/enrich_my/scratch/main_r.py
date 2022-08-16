@@ -4,10 +4,10 @@ import uuid
 from typing import List, Optional
 
 from asyncpg import Pool
-from core.config import logger
+# from core.config import logger
 from db.auth import get_pool
-from fastapi import Depends
-from schemas.base import UserResponse
+# from fastapi import Depends
+# from schemas.base import UserResponse
 
 
 from typing import Optional
@@ -36,6 +36,7 @@ async def get_by_id( user_id: uuid.UUID):
 
             # user = UserResponse.parse_obj(dict(row))
             # logger.info(f'Get user: {user}')
+
             print(f'here row : {row}')
 
         return row
@@ -46,7 +47,7 @@ async def get_by_id( user_id: uuid.UUID):
 
 # --INSERT INTO public."user" VALUES ('a61846cf-8882-4213-a471-f763000d1147', '2022-01-23 14:05:32.084682', '2022-01-23 14:05:32.084682', 'Pup', 'password_hash', 'first_name', 'last_name', 'email', 'true', 'totp_secret', 'true');
 
-print(get_by_id('a61846cf-8882-4213-a471-f763000d1147'))
+print(await get_by_id('a61846cf-8882-4213-a471-f763000d1147'))
 
 
 # class AuthService:

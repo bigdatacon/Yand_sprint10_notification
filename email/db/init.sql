@@ -315,7 +315,28 @@ CREATE TABLE public."user" (
 
 ALTER TABLE public."user" OWNER TO "postgres";
 
---INSERT INTO public."user" VALUES ('a61846cf-8882-4213-a471-f763000d1147', '2022-01-23 14:05:32.084682', '2022-01-23 14:05:32.084682', 'Pup', 'password_hash', 'first_name', 'last_name', 'email', 'true', 'totp_secret', 'true');
+INSERT INTO public."user" VALUES ('a61846cf-8882-4213-a471-f763000d1147', '2022-01-23 14:05:32.084682', '2022-01-23 14:05:32.084682', 'Pup', 'password_hash', 'first_name', 'last_name', 'email', 'true', 'totp_secret', 'true');
+
+-- Добавляю таблицу без кавычек чтобы нормально читалась
+
+CREATE TABLE public.user (
+    id uuid NOT NULL,
+    created timestamp without time zone NOT NULL,
+    updated timestamp without time zone NOT NULL,
+    username character varying NOT NULL,
+    password_hash character varying NOT NULL,
+    first_name character varying,
+    last_name character varying,
+    email character varying,
+    is_verified boolean,
+    totp_secret character varying,
+    is_active_2fa boolean
+);
+
+
+ALTER TABLE public.user OWNER TO "postgres";
+
+INSERT INTO public.user VALUES ('a61846cf-8882-4213-a471-f763000d1147', '2022-01-23 14:05:32.084682', '2022-01-23 14:05:32.084682', 'Pup', 'password_hash', 'first_name', 'last_name', 'email', 'true', 'totp_secret', 'true');
 
 
 
