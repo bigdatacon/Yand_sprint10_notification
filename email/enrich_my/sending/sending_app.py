@@ -54,15 +54,15 @@ def sendmail(recepient: str,  msg: str, smtp_serv: GetPullConnection):
 
     smtp_serv.quit()
 
-
-# recepient = 'yandextest@bk.ru'
-recepient = 'link17892020@gmail.com'
-name_user = 'Johnson'
-msg = f'your recomendation + {name_user}'
-# msg = 'your recomendation'
-smtpStr = 'smtp.mail.ru'
-smtpPort = 587
-smtp_serv = GetPullConnection(smtpStr, smtpPort).smtp_serv_custom()
-print(f' smtp_serv: {smtp_serv}, type : {type(smtp_serv)}')
-sendmail(recepient,  msg, smtp_serv)
-print('ALL DONE')
+if __name__ == '__main__':
+    # recepient = 'yandextest@bk.ru'
+    recepient = 'link17892020@gmail.com'
+    name_user = 'Johnson'
+    msg = f'your recomendation + {name_user}'
+    # msg = 'your recomendation'
+    smtpStr = 'smtp.mail.ru'
+    smtpPort = 587
+    smtp_serv = GetPullConnection(smtpStr, smtpPort).smtp_serv_custom()
+    print(f' smtp_serv: {smtp_serv}, type : {type(smtp_serv)}')
+    sendmail(recepient,  msg, smtp_serv)
+    print('ALL DONE')

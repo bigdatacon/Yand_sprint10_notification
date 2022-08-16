@@ -10,9 +10,11 @@ c = Consumer({
 c.subscribe(['example_topic'])
 
 while True:
-    msg = c.poll(1.0)
+    # msg = c.poll(1.0)
+    msg = c.poll(0)
 
     if msg is None:
+
         continue
     if msg.error():
         print("Consumer error: {}".format(msg.error()))
