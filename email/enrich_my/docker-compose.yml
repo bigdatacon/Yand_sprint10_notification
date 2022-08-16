@@ -17,9 +17,10 @@ services:
 #    env_file:
 #      - ./.env
 #    restart: unless-stopped
-#
-#  kafka:
-#    image: confluentinc/cp-kafka:7.0.1
+##
+#  kafka_my:
+##    image: confluentinc/cp-kafka_my:7.0.1
+#    image: confluentinc/cp-kafka-connect:7.2.1
 #    depends_on:
 #      - zookeeper
 #    ports:
@@ -27,15 +28,15 @@ services:
 #    env_file:
 #      - ./.env
 #    restart: unless-stopped
-#
+##
 #  topics_init_python:
 #    container_name: topics_init_python
 #    depends_on:
-#      - kafka
+#      - kafka_my
 #    build:
-#      context: ./kafka
+#      context: ./kafka_my
 #    volumes:
-#      - ./kafka:/app/
+#      - ./kafka_my:/app/
 #    restart: on-failure
 #
 #  worker:

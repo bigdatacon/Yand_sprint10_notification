@@ -26,7 +26,7 @@ class Config(BaseSettings):
     manager_period: int = Field(env='manager_period', default=15)
     standart_queue = 'standart'
 
-    kafka_host: str = Field(env='kafka_host', default='kafka')
+    kafka_host: str = Field(env='kafka_host', default='kafka_my')
     kafka_port: str = Field(env='kafka_port', default='29092')
     kafka_max_producer_timeout: int = Field(env='kafka_max_producer_timeout', default=100)
 

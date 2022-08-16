@@ -48,28 +48,23 @@ if __name__ == '__main__':
     connection = PGConnection('auth').main()
     print(f' eto connection : {connection}')
     cursor = connection.cursor()
-    # cursor.execute("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';")
-    # print(cursor.fetchall())
+    cursor.execute("select relname from pg_class where relkind='r' and relname !~ '^(pg_|sql_)';")
+    print(cursor.fetchall())
     id_seek = 'a61846cf-8882-4213-a471-f763000d1147'
     postgreSQL_select_Query = "select * from public.user ;"
-    # postgreSQL_select_Query = "SELECT id, username, email FROM public.user WHERE id=$1"
-    # cursor.execute(postgreSQL_select_Query, id_seek)
     cursor.execute(postgreSQL_select_Query)
     print(cursor.fetchall())
-    #
-    cursor.execute("select username, first_name, last_name from public.user  WHERE id = (%s);", (id_seek,))
 
+    cursor.execute("select username, first_name, last_name from public.user  WHERE id = (%s);", (id_seek,))
     print("Selecting rows from mobile table using cursor.fetchall")
     print(cursor.fetchall())
-    # print(f' eto AuthService : {AuthService(connection).get_by_id(id_seek)}')           ## Не работает вызов функции в email/enrich_my/wait_for_pg.py
     print(f' eto AuthServiceMy : {AuthServiceMy(connection).get_by_id(id_seek)}')
 
-
     cursor.execute("select id username, first_name, last_name from public.user ;")
-
     print("Selecting all ids rows from mobile table using cursor.fetchall")
     print(cursor.fetchall())
-
     print(f' eto AuthServiceMy get all : {AuthServiceMy(connection).get_all_users_info_from_table()}')
+
+    # print(f' eto AuthService : {AuthService(connection).get_by_id(id_seek)}')  ## Не работает вызов функции в email/enrich_my/wait_for_pg.py
 
 

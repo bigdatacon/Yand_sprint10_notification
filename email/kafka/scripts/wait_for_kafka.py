@@ -1,4 +1,4 @@
-"""Wait for kafka."""
+"""Wait for kafka_my."""
 
 import logging
 import time
@@ -9,7 +9,7 @@ from kafka.errors import NoBrokersAvailable
 
 def main():
     """Main."""
-    servers_name = ['kafka:29092', ]
+    servers_name = ['kafka_my:29092', ]
     logging.info('Connecting to Kafka...')
     while True:
         try:

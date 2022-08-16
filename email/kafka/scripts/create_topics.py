@@ -17,7 +17,7 @@ class Kafka:
         :param client_id:
         """
         if servers_name is None:
-            servers_name = ['kafka:29092', ]
+            servers_name = ['kafka_my:29092', ]
 
         self.admin_client = KafkaAdminClient(bootstrap_servers=servers_name, client_id=client_id)
 

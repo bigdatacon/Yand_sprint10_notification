@@ -1,4 +1,4 @@
-"""Wait for kafka."""
+"""Wait for kafka_my."""
 
 import logging
 import os
@@ -12,7 +12,7 @@ def main():
     """Main."""
     servers_name = [
         '{}:{}'.format(
-            os.environ.get('kafka_host', 'kafka'),
+            os.environ.get('kafka_host', 'kafka_my'),
             os.environ.get('kafka_port', '29092')
         ),
     ]

@@ -1,4 +1,4 @@
-"""Wait for kafka."""
+"""Wait for kafka_my."""
 
 import logging
 import os
@@ -10,7 +10,7 @@ from kafka.errors import NoBrokersAvailable
 
 def main():
     """Main."""
-    kafka_host = os.getenv('KAFKA_HOST', 'kafka')
+    kafka_host = os.getenv('KAFKA_HOST', 'kafka_my')
     kafka_port = os.getenv('KAFKA_PORT', '29092')
     servers_name = [f'{kafka_host}:{kafka_port}', ]
     logging.info('Connecting to Kafka...')

@@ -6,7 +6,7 @@ EMAIL_SHIPPING_METHOD = 'email'
 
 NOTIFICATIONS_TOPIC_NAME = 'notifications'
 
-kafka_host = os.getenv('KAFKA_HOST', 'kafka')
+kafka_host = os.getenv('KAFKA_HOST', 'kafka_my')
 kafka_port = os.getenv('KAFKA_PORT', '29092')
 
 # Kafka consumer
