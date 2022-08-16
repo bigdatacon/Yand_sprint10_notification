@@ -63,3 +63,13 @@ if __name__ == '__main__':
     print(cursor.fetchall())
     # print(f' eto AuthService : {AuthService(connection).get_by_id(id_seek)}')           ## Не работает вызов функции в email/enrich_my/wait_for_pg.py
     print(f' eto AuthServiceMy : {AuthServiceMy(connection).get_by_id(id_seek)}')
+
+
+    cursor.execute("select id username, first_name, last_name from public.user ;")
+
+    print("Selecting all ids rows from mobile table using cursor.fetchall")
+    print(cursor.fetchall())
+
+    print(f' eto AuthServiceMy get all : {AuthServiceMy(connection).get_all_users_info_from_table()}')
+
+

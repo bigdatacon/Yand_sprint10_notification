@@ -25,3 +25,19 @@ class AuthServiceMy:
             logger.exception('Can not found user id in auth database.')
             return None
 
+    def get_all_users_info_from_table(self):
+        """Get user info by id.
+        :param user_id:
+        :return:
+        """
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("select id username, first_name, last_name from public.user")
+            user = cursor.fetchall()
+            logger.info(f'Get all user: {user}')
+            return user
+
+        except Exception:
+            logger.exception('Can not found user id in auth database.')
+            return None
+
