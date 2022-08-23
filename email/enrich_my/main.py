@@ -4,6 +4,8 @@ from fastapi import FastAPI
 
 from pydantic import BaseModel
 from services.authmy import AuthServiceMy
+from services.auth import AuthService
+from services.apitesting import  get_auth_servicetesting, AuthServicetesting
 from wait_for_pg import PGConnection
 import requests
 
@@ -29,6 +31,10 @@ async def return_user_info_by_id(db_name):
     connection = PGConnection(db_name).main()
     user_info = AuthServiceMy(connection).get_all_users_info_from_table()
     return {'user_info' : user_info}
+
+@app.get('/test_async')
+async def test_async():
+    return AuthServicetesting.get_by_id()
 
 
 

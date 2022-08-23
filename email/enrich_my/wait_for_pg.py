@@ -4,7 +4,6 @@
 import logging
 import os
 import time
-from auth import AuthService
 from services.authmy import AuthServiceMy
 
 import psycopg2
