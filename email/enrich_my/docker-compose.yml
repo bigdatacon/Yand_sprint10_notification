@@ -15,7 +15,7 @@ services:
 #    ports:
 #      - 22181:2181
 #    env_file:
-#      - ./.env
+#      - ./..env
 #    restart: unless-stopped
 ##
 #  kafka_my:
@@ -26,7 +26,7 @@ services:
 #    ports:
 #      - 29092:29092
 #    env_file:
-#      - ./.env
+#      - ./..env
 #    restart: unless-stopped
 ##
 #  topics_init_python:
@@ -45,7 +45,7 @@ services:
 #    container_name: worker
 #    user: web
 #    env_file:
-#      - ./worker/.env
+#      - ./worker/..env
 #    restart: unless-stopped
 #
 #  notification_service:
@@ -54,7 +54,7 @@ services:
 #    container_name: notification_service
 #    user: web
 #    env_file:
-#      - ./notification_service/.env
+#      - ./notification_service/..env
 #    restart: unless-stopped
 #
 #  cron_service:
@@ -63,7 +63,7 @@ services:
 #    container_name: cron_service
 #    user: web
 #    env_file:
-#      - ./cron_service/.env
+#      - ./cron_service/..env
 #    restart: unless-stopped
 #
 #  enrichment_service:
@@ -72,7 +72,7 @@ services:
 #    container_name: enrichment_container
 #    user: web
 #    env_file:
-#      - ./enrichment_service/.env
+#      - ./enrichment_service/..env
 #    ports:
 #      - "80:8080"
 #    restart: unless-stopped
